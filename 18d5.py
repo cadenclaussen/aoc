@@ -1,4 +1,4 @@
-with open("18d5_2.txt") as f:
+with open("18d5.txt") as f:
     a= f.read().strip("\n")
 a = list(a)
 pos = 0
