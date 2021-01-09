@@ -1,29 +1,28 @@
 count = 0
+count2 = 0
 for i in range(134564, 585159):
     cur = str(i)
-    doesStayOrIncrease = [int(cur[j]) <= int(cur[j + 1]) for j in range(len(cur) - 1)]
+    doesStayOrIncrease = \
+    [int(cur[j]) <= int(cur[j+1]) for j in range(len(cur)-1)]
     if not all(doesStayOrIncrease):
         continue
+    # print(doesStayOrIncrease)
     isValid = False
 
-    for j in range(len(cur) - 1):
-        if cur[j] == cur[j + 1]:
+    for j in range(len(cur)-1):
+        if cur[j] == cur[j+1]:
             isValid = True
     if isValid:
         count += 1
-print("Part 1: " + str(count))
 
-count = 0
-for i in range(134564, 585159):
-    cur = str(i)
-    doesStayOrIncrease = [int(cur[j]) <= int(cur[j + 1]) for j in range(len(cur) - 1)]
-    if not all(doesStayOrIncrease):
-        continue
+    #part 2
     isValid = False
-
-    for j in range(len(cur) - 3):
-        if cur[j] == cur[j + 1] and not cur[j - 1] == cur[j] == cur[j + 1] and not cur[j] == cur[j + 1] == cur[j + 2] and not cur[j - 2] == cur[j - 1] == cur[j]:
+    for j in range(10):
+        num = str(j)
+        if num * 2 in cur and num*3 not in cur:
             isValid = True
     if isValid:
-        count += 1
-print("Part 2: " + str(count))
+        count2 += 1
+
+print("part 1", count)
+print("part 2", count2)
