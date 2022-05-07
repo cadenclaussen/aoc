@@ -79,6 +79,7 @@ def printFloor(floor):
         print("|", end="")
         for y in range(len(row)):
             print(row[y], end="")
+
         print()
 
 main()

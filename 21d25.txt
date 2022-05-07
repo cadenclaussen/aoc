@@ -6,4 +6,8 @@ v>v.vv.v..
 >.>>..v...
 .vv..>.>v.
 v.v..>>v.v
+<<<<<<< HEAD
 ....v..v.>
+=======
+....v..v.>
+>>>>>>> e8eda8b (still not working correctly, but almost there)
