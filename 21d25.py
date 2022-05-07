@@ -21,52 +21,52 @@ def step(floor):
         floor, movesEast = eastHerd(floor)
         floor, movesSouth = southHerd(floor)
         moves = movesEast or movesSouth
-        if moves:
-            step += 1
-            print()
-            print("After " + str(step) + " step(s):")
-            printFloor(floor)
+        step += 1
+        print()
+        print("After " + str(step) + " step(s):")
+        printFloor(floor)
     return step
 
 def eastHerd(floor):
     moves = False
+    changes = []
     for y in range(len(floor)):
-        x = 0
-        while x < len(floor[0]):
+        for x in range(len(floor[0])):
             if floor[y][x] == ">":
                 if x == len(floor[0]) - 1:
                     if (floor[y][0] == "."):
                         # > is at the end of the row, '.' at beg, wrap the move
-                        moves = True
-                        floor[y][x] = "."
-                        floor[y][0] = ">"
+                        changes.append([[y, x], [y, 0]])
+
                 elif floor[y][x + 1] == ".":
                     # > is NOT at the end of the row
-                    moves = True
-                    floor[y][x] = "."
-                    floor[y][x + 1] = ">"
-                    # Skip the next x since it is our just moved ">"
-                    x += 1
-            x += 1
+                    changes.append([[y, x], [y, x+1]])
+
+    for change in changes:
+        floor[change[0][0]][change[0][1]] = "."
+        floor[change[1][0]][change[1][1]] = ">"
+        moves = True
+
     return floor, moves
 
 def southHerd(floor):
     moves = False
+    changes = []
     for x in range(len(floor[0])):
-        y = 0
-        while y < len(floor):
+        for y in range(len(floor)):
             if floor[y][x] == "v":
                 if y == len(floor) - 1:
                     if floor[0][x] == ".":
-                        moves = True
-                        floor[y][x] = "."
-                        floor[0][x] = "v"
+                        changes.append([[y, x], [0, x]])
+
                 elif floor[y + 1][x] == ".":
-                    moves = True
-                    floor[y][x] = "."
-                    floor[y + 1][x] = "v"
-                    y += 1
-            y += 1
+                    changes.append([[y, x], [y+1, x]])
+
+    for change in changes:
+        floor[change[0][0]][change[0][1]] = "."
+        floor[change[1][0]][change[1][1]] = "v"
+        moves = True
+
     return floor, moves
 
 def printFloor(floor):
