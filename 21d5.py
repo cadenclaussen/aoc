@@ -4,7 +4,11 @@ with open("21d5.txt") as f:
 def printPlane(plane):
     for y in plane:
         for x in y:
+            if x == "0 ":
+                x = ". "
             print(x, end="")
+            if x == ". ":
+                x = "0 "
         print("")
 
 coordinants = []
@@ -65,8 +69,28 @@ def checkDiagnal(coordinants, plane):
         x2 = int(coordinant[1][0])
         y1 = int(coordinant[0][1])
         y2 = int(coordinant[1][1])
-        print(x1, y1, x2, y2)
+        if x1 == x2 or y1 == y2:
+            continue    
         slope = (y1 - y2)/(x1 - x2)
+
+        if slope == -1:
+            if x1 > x2:
+                for i in range(x1 - x2 + 1):
+                    plane[y1 + i][x1 - i] = str(int(plane[y1 + i][x1 - i]) + 1) + " "
+
+            if x2 > x1:
+                for i in range(x2 - x1 + 1):
+                    plane[y2 + i][x2 - i] = str(int(plane[y2 + i][x2 - i]) + 1) + " "    
+
+        elif slope == 1:
+
+            if x2 > x1:
+                for i in range(x2 - x1 + 1):
+                    plane[y1 + i][x1 + i] = str(int(plane[y1 + i][x1 + i]) + 1) + " "
+
+            if x1 > x2:
+                for i in range(x1 - x2 + 1):
+                    plane[y2 + i][x2 + i] = str(int(plane[y2 + i][x2 + i]) + 1) + " "  
 
 plane = checkHorizVert(coordinants, plane)
 checkDiagnal(coordinants, plane)
