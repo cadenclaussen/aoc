@@ -1,21 +1,22 @@
 with open("21d6.txt") as f:
-    lfishes = f.read().strip().split(",")
-print(lfishes)
+    ages = f.read().strip().split(",")
+#print(lfishes)
 
-newList = []
-for _ in range(256):
-    for lfish in lfishes:
-        if int(lfish) == 0:
+
+for age in ages:
+    ages[ages.index(age)] = int(age)
+
+for day in range(80):
+    newList = []
+    for age in ages:
+        if age == 0:
             newList.append(6)
             newList.append(8)
+        else:
+            newList.append(age - 1)
 
-    for lfish in lfishes:
-        if lfish != 0:
-            newList.append(int(lfish) - 1)
-        
+    ages = newList
+    print(day + 1, ages)
 
 
-    lfishes = newList
-    newList = []
-
-print(len(lfishes))
+print(len(ages))
